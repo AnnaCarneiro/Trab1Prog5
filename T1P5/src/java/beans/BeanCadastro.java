@@ -5,12 +5,10 @@
  */
 package beans;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import models.Cadastro;
+import models.Produto;
 
 /**
  *
@@ -19,19 +17,19 @@ import models.Cadastro;
 @ManagedBean
 public class BeanCadastro {
 
-    private int idcadastro;
-    private String descricao;   
-    private String preco;
+    private int idproduto;
+    private String descricao;
+    private double preco;
     private String observacao;
-    private String qtdEstoque;
-    private Categoria categoria;
+    private Double estoque;
+    private int idcategoria;
 
-    public int getIdcadastro() {
-        return idcadastro;
+    public int getIdproduto() {
+        return idproduto;
     }
 
-    public void setIdcadastro(int idcontato) {
-        this.idcadastro = idcontato;
+    public void setIdproduto(int idcontato) {
+        this.idproduto = idcontato;
     }
 
     public String getDescricao() {
@@ -42,11 +40,11 @@ public class BeanCadastro {
         this.descricao = descricao;
     }
 
-    public String getPreco() {
+    public double getPreco() {
         return preco;
     }
 
-    public void setPreco(String preco) {
+    public void setPreco(double preco) {
         this.preco = preco;
     }
 
@@ -58,19 +56,22 @@ public class BeanCadastro {
         this.observacao = observacao;
     }
 
-    public String getQtdEstoque() {
-        return qtdEstoque;
+    public Double getQtdEstoque() {
+        return estoque;
     }
 
-    public void setQtdEstoque(String qtdEstoque) {
-        this.qtdEstoque = qtdEstoque;
+    public void setQtdEstoque(Double qtdEstoque) {
+        this.estoque = qtdEstoque;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
+    public void setIdcategoria(int idcategoria) {
+        this.idcategoria = idcategoria;
     }
 
-   
+    public int getIdcategoria() {
+        return idcategoria;
+    }
+
     public void salvar() {
         FacesContext view = FacesContext.getCurrentInstance();
         FacesMessage msg = null;
@@ -78,14 +79,9 @@ public class BeanCadastro {
         if (descricao.equals("")) {
             msg = new FacesMessage("Informe Descrição");
             view.addMessage(null, msg);
-        }        
-                        
-        if (preco.equals("")) {
-            msg = new FacesMessage("Informe Preço");
-            view.addMessage(null, msg);
         }
 
-        if (qtdEstoque.equals("")) {
+        if (estoque.equals("")) {
             msg = new FacesMessage("Informe Quantidade em Estoque");
             view.addMessage(null, msg);
         }
@@ -93,10 +89,9 @@ public class BeanCadastro {
             msg = new FacesMessage("Informe Observação");
             view.addMessage(null, msg);
         }
-        
 
         if (msg == null) {
-            Cadastro cad = new Cadastro(idcadastro, descricao, preco, qtdEstoque, observacao);
+            Produto cad = new Produto(idproduto, descricao, preco, estoque, observacao, idcategoria);
             if (cad.salvar()) {
                 msg = new FacesMessage("Contato salvo com sucesso");
                 view.addMessage(null, msg);
