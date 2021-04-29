@@ -6,20 +6,47 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Consulta</title>
+        <link rel="stylesheet" type="text/css" href="styles/consultaP.css"/>
     </h:head>
     <h:body>
         <ui:include src="WEB-INF/navbar.xhtml" />
         <h:form>
-            <h:panelGrid columns="3">
-                <h:outputLabel>Informe parte do nome do produto</h:outputLabel>
-                <h:inputText value="#{beanCadastro.descricao}" />
-                <h:commandButton value="Pesquisar" action="#{beanCadastro.consultar()}" />
+            <h:panelGrid columns="1">
+                <h:outputLabel styleClass="titulo">Informe parte do nome do produto</h:outputLabel>
+                <h:inputText value="#{beanCadastro.descricao}" styleClass="imput" />
+                <h:commandButton value="Pesquisador" action="#{ConsultaProduto.consultarProduto()}"  styleClass="pesquisar"/>
 
-                <h:outputLabel>Filtrar por categoria?</h:outputLabel>
-                <h:selectBooleanCheckbox />
-                <h:selectOneMenu value="#{categoria.idcategoria}">
+                <h:selectBooleanCheckbox styleClass="check"/>
+                <h:outputLabel styleClass="filtro">Filtrar por categoria?</h:outputLabel>                
+                <h:selectOneMenu value="#{categoria.idcategoria}" styleClass="categoria">
                     <f:selectItems value="#{categoria.lista}" var="cat" itemValue="#{cat.idcategoria}" itemLabel="#{cat.descricao}" />
                 </h:selectOneMenu>
+
+                <h:dataTable var="ct" value="#{beanProduto.lista}" >
+                    <h:column>
+                        <f:facet name="header">Código</f:facet>
+                        <h:outputLabel value="#{ct.idproduto}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Descrição</f:facet>
+                        <h:outputLabel value="#{ct.descricao}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Categoria</f:facet>
+                        <h:outputLabel value="#{ct.categoria}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">R$ Unitário</f:facet>
+                        <h:outputLabel value="#{ct.preco}" />
+                    </h:column>  
+                    <h:column>
+                        <f:facet name="header">Estoque</f:facet>
+                        <h:outputLabel value="#{ct.qtdestoque}" />
+                    </h:column>                  
+                    <h:column>
+                        <h:commandButton value="Editar" onclick="#{beanProduto.redirectEditar(ct.idproduto)}"/>
+                    </h:column>
+                </h:dataTable>
 
             </h:panelGrid>
 

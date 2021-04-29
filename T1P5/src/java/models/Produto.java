@@ -39,6 +39,10 @@ public class Produto {
         this.idcategoria = idcategoria;
     }
 
+    Produto(int aInt, String string, String string0, String string1) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public List<Categoria> consultar(String filtro) {
         ResultSet rs = null;
         List<Categoria> lista = new ArrayList<>();

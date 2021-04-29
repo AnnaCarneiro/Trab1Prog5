@@ -5,25 +5,35 @@
  */
 package models;
 
+import beans.ConsultaProduto;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import models.utils.Conexao;
+
 /**
  *
  * @author aninh
  */
 public class Consulta {
-    private int iddescricao;
+
+    private int idproduto;
     private String descricao;
     private String categoria;
     private double preco;
-    private int estoque;
+    private double estoque;
     private String editar;
-    private String excluir;  
-    
-    public Consulta(){
-        
+    private String excluir;
+
+    public Consulta() {
+
     }
 
-    public Consulta(int iddescricao, String descricao, String categoria, double preco, int estoque, String editar, String excluir) {
-        this.iddescricao = iddescricao;
+    public Consulta(int idproduto, String descricao, String categoria, double preco, double estoque, String editar, String excluir) {
+        this.idproduto = idproduto;
         this.descricao = descricao;
         this.categoria = categoria;
         this.preco = preco;
@@ -32,12 +42,36 @@ public class Consulta {
         this.excluir = excluir;
     }
 
-    public int getIddescricao() {
-        return iddescricao;
+    public List<ConsultaProduto> consultarProduto(String filtro) {
+        ResultSet rs = null;
+        List<ConsultaProduto> listaProdutos = new ArrayList<>();
+        try {
+            String sql = "select * from produto"
+                    + " where descricao like '%" + filtro + "%'";
+            Connection con = Conexao.conectar();
+            PreparedStatement stm = con.prepareStatement(sql);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                ConsultaProduto prod = new ConsultaProduto();  
+               prod.setIndproduto(rs.getInt("idproduto"));
+               prod.setDescricao(rs.getString("descricao"));
+               prod.setPreco(rs.getDouble("preco"));
+               prod.setEstoque(rs.getDouble("estoque"));
+               listaProdutos.add(prod);
+            }
+
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        }
+        return listaProdutos;
     }
 
-    public void setIddescricao(int iddescricao) {
-        this.iddescricao = iddescricao;
+    public int getIdproduto() {
+        return idproduto;
+    }
+
+    public void setIdproduto(int idproduto) {
+        this.idproduto = idproduto;
     }
 
     public String getDescricao() {
@@ -64,11 +98,11 @@ public class Consulta {
         this.preco = preco;
     }
 
-    public int getEstoque() {
+    public double getEstoque() {
         return estoque;
     }
 
-    public void setEstoque(int estoque) {
+    public void setEstoque(double estoque) {
         this.estoque = estoque;
     }
 
@@ -87,8 +121,5 @@ public class Consulta {
     public void setExcluir(String excluir) {
         this.excluir = excluir;
     }
-    
-    
-    
-    
+
 }

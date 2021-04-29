@@ -48,11 +48,10 @@ body{
 }
 
 .salvar{
-    position: absolute;
+    position: relative;
     width: 98px;
     height: 25px; 
-    left: 40%;
-    top: 425px;
+    left: 182%;    
     background: #5C8997;
     border-radius: 15px;
     color: #F11212;
@@ -61,11 +60,11 @@ body{
 }
 
 .cancelar{
-    position: absolute;
+    position: relative;
     width: 98px;
     height: 25px;
-    left: 56%;
-    top: 425px;
+    left: 252%;
+    top: -28px;
     background: #FF8F96;
     border-radius: 15px;
     font-weight: bold;font-size: 14px;

@@ -1,0 +1,77 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Author     : aninh
+*/
+body{
+    background-color: #D4DCDD;
+}
+
+.titulo{
+    font-size: 12pt;         
+    display: flex;      
+    flex-direction: row;
+    position: relative;
+    left: 25px;
+    margin-top: 25px;
+}
+
+.filtro{
+    font-size: 12pt;   
+    position: relative;    
+    display: inline-block !important; 
+    left: 50px;
+    top: -26px;
+}
+
+.imput{
+    position: absolute;
+    width: 302px;
+    height: 28px;
+    left: 33px;
+    background: #F8FCFC;    
+    border-radius: 10px; 
+    margin-top: 15px;    
+}
+
+.categoria{
+    background: #F8FCFC;
+    border-radius: 10px;
+    width: 289px;
+    height: 36px; 
+    position: relative;      
+    top: -56px;
+    left: 200px;
+}
+
+.pesquisar{
+    position: absolute;
+    width: 161px;
+    height: 30px;
+    left: 350px;
+    margin-top: 15px;
+    background: #5C8997;
+    border-radius: 15px;
+    position: absolute;      
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    color: #F11212;
+}
+
+.check{            
+    width: 17px;
+    height: 17px;
+    display: inline-block !important;          
+    position: relative;
+    margin: 60px 15px 0px 22px;
+}
+
+
+
